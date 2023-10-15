@@ -24,7 +24,7 @@ class ServicService {
         }
         const service = await Services.findOne({ where: { name_service } })
         if (!service) {
-            throw ApiError.BadRequest(`Такой кафедры не существует: ${name_service}`)
+            throw ApiError.BadRequest(`Такой услуги не существует: ${name_service}`)
         }
         return service
     }

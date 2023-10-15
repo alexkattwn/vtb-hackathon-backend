@@ -20,7 +20,7 @@ class OfficeService {
         distance,
         kep,
         my_branch
-        ) {
+    ) {
         // const pointName = await DataOffices.findOne({ where: { sale_point_name } })
         // if (pointName) {
         //     throw ApiError.BadRequest(`Такой банк уже существует: ${sale_point_name}`)
@@ -31,7 +31,7 @@ class OfficeService {
         //     throw ApiError.BadRequest(`Такой адрес уже существует: ${address}`)
         // }
 
-        const createdRole = await DataOffices.create({ 
+        const createdRole = await DataOffices.create({
             sale_point_name,
             address,
             status,
@@ -47,7 +47,8 @@ class OfficeService {
             metro_station,
             distance,
             kep,
-            my_branch })
+            my_branch
+        })
         return createdRole
     }
 
@@ -62,7 +63,7 @@ class OfficeService {
         }
         const name = await DataOffices.findOne({ where: { sale_point_name } })
         if (!name) {
-            throw ApiError.BadRequest(`Такой кафедры не существует: ${sale_point_name}`)
+            throw ApiError.BadRequest(`Такого офиса не существует: ${sale_point_name}`)
         }
         return name
     }

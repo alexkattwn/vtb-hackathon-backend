@@ -6,7 +6,7 @@ class RoleService {
     async create(name_role) {
         const role = await Roles.findOne({ where: { name_role } })
         if (role) {
-            throw ApiError.BadRequest(`Такая кафедра уже существует: ${name_role}`)
+            throw ApiError.BadRequest(`Такая роль уже существует: ${name_role}`)
         }
         const createdRole = await Roles.create({ name_role })
         return createdRole
@@ -23,7 +23,7 @@ class RoleService {
         }
         const role = await Roles.findOne({ where: { name_role } })
         if (!role) {
-            throw ApiError.BadRequest(`Такой кафедры не существует: ${name_role}`)
+            throw ApiError.BadRequest(`Такой роли не существует: ${name_role}`)
         }
         return role
     }

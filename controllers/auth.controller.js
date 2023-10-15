@@ -30,15 +30,22 @@ class AuthController {
         }
     }
 
-    // async activate(req, res, next) {
-    //     try {
-    //         const activation_link = req.params.link
-    //         await AuthService.activate(activation_link)
-    //         return res.redirect(process.env.CLIENT_URL)
-    //     } catch (e) {
-    //         next(e)
-    //     }
-    // }
+    async getProfile(req, res, next) {
+        try {
+            const authorizationHeader = req.headers.authorization
+            if (!authorizationHeader) {
+                return next(ApiError.UnauthorizedError())
+            }
+            const accessToken = authorizationHeader.split(' ')[1]
+            if (!accessToken) {
+                return next(ApiError.UnauthorizedError())
+            }
+            const userData = await AuthService.getProfile(accessToken)
+            return res.status(200).json(userData)
+        } catch (e) {
+            next(e)
+        }
+    }
 
     async getUsers(req, res, next) {
         try {

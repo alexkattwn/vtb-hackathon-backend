@@ -12,6 +12,9 @@ class AuthService {
     async registration(name_role, email, login, password) {
         const candidateByEmail = await Users.findOne({ where: { email } })
         const candidateByLogin = await Users.findOne({ where: { login } })
+        if (!name_role) {
+            throw ApiError.BadRequest(`Такой роли нет ${name_role} `)
+        }
         if (candidateByEmail) {
             throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
         }
@@ -62,6 +65,15 @@ class AuthService {
     async getById(id) {
         const user = await Users.findByPk(id)
         return user
+    }
+
+    async getProfile(token) {
+
+        const user = await TokenService.validateAccessToken(token)
+        if (user) {
+            return user
+        }
+        return null
     }
 
     async uploadImage(id_user, image) {

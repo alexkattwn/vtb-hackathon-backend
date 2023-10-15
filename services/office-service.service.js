@@ -5,20 +5,20 @@ const ApiError = require("../exceptions/api.error")
 
 class OfficeServicesService {
 
-    async create(id_service,id_office,workload) {
-        console.log(id_service,id_office,workload);
+    async create(id_service, id_office, workload) {
+        console.log(id_service, id_office, workload);
 
-        const idOffice = await DataOffices.findOne({ where: {  id_data_offices :id_office  } })
+        const idOffice = await DataOffices.findOne({ where: { id_data_offices: id_office } })
         if (!idOffice) {
             throw ApiError.BadRequest(`ТакОго id не существует: ${id_office}`)
         }
 
-        const idService = await Services.findOne({ where: { id_service  : id_service  } })
+        const idService = await Services.findOne({ where: { id_service: id_service } })
         if (!idService) {
             throw ApiError.BadRequest(`ТакОго id не существует: ${id_service}`)
         }
 
-        const createdOfficeServ = await Office_Services.create({ id_service,id_office,workload})
+        const createdOfficeServ = await Office_Services.create({ id_service, id_office, workload })
         return createdOfficeServ
     }
 
@@ -33,7 +33,7 @@ class OfficeServicesService {
         }
         const role = await Office_Services.findOne({ where: { id_office_services } })
         if (!role) {
-            throw ApiError.BadRequest(`Такой кафедры не существует: ${id_office_services}`)
+            throw ApiError.BadRequest(`Такого id не существует: ${id_office_services}`)
         }
         return role
     }

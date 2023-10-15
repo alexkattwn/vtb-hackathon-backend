@@ -3,11 +3,11 @@ const ApiError = require("../exceptions/api.error")
 
 class AstmServicesService {
 
-    async create(id_service,id_astm) {
-        if(!id_service && !id_astm){
+    async create(id_service, id_astm) {
+        if (!id_service && !id_astm) {
             return null
         }
-        const createdAstmServ = await Astm_Services.create({ id_service,id_astm })
+        const createdAstmServ = await Astm_Services.create({ id_service, id_astm })
         return createdAstmServ
     }
 
@@ -22,7 +22,7 @@ class AstmServicesService {
         }
         const role = await Astm_Services.findOne({ where: { id_astm_services } })
         if (!role) {
-            throw ApiError.BadRequest(`Такой кафедры не существует: ${id_astm_services}`)
+            throw ApiError.BadRequest(`Такого id не существует: ${id_astm_services}`)
         }
         return role
     }

@@ -13,7 +13,7 @@ router.post(
 )
 router.post("/login", authController.login)
 router.get("/:id", authController.getById)
-// router.get("/activate/:link", authController.activate)
+router.get("/", authController.getProfile)
 router.get("/users", authController.getUsers)
 router.post("/upload", authController.uploadImage)
 
